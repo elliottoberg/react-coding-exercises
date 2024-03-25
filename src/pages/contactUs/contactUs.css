@@ -1,0 +1,24 @@
+.contact-form {
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  .field {
+    display: flex;
+    flex-direction: column;
+    max-width: 300px;
+  }
+
+  .field.textarea {
+    max-width: 500px;
+  }
+
+  textarea {
+    min-height: 300px;
+  }
+
+  .submit-button {
+    width: fit-content;
+  }
+}
