@@ -2,8 +2,10 @@ import React from "react";
 import { NavLink, Outlet, useSearchParams } from "react-router-dom";
 import './root.css'
 import { projects } from "../../main";
+import { useLocalStorage } from "usehooks-ts";
 
 export default function Root() {
+  const { isOpen, toggleSidebar } = useSidebarState();
   const { projects, query, setQuery } = useProjects();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -12,7 +14,11 @@ export default function Root() {
 
   return (
     <>
-      <div id="sidebar">
+      <div id="sidebar" className={isOpen ? "open" : "closed"}>
+        <div className="tab">
+          <button onClick={toggleSidebar} className={isOpen ? "open" : "closed"}><div className="tabText">{"<"}</div></button>
+        </div>
+        
         <h1>Projects</h1>
         <div>
           <form id="search-form" role="search">
@@ -80,4 +86,11 @@ function useProjects() {
     }, { replace });
   }
   return { projects: searchResults, query, setQuery };
+}
+
+function useSidebarState() {
+  const [isOpen, setIsOpen] = useLocalStorage("sidebar", true);
+  const toggleSidebar = () => setIsOpen(!isOpen);
+  
+  return { isOpen, toggleSidebar };
 }

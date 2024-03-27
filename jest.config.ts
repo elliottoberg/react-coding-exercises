@@ -6,6 +6,8 @@
 import type {Config} from 'jest';
 
 const config: Config = {
+  modulePaths: ["./"],
+  
   // Automatically clear mock calls, instances, contexts and results before every test
   clearMocks: true,
   resetMocks: true,

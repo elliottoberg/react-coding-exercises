@@ -1,13 +1,13 @@
-import { render, screen } from '@testing-library/react';
+import { renderWithProviders } from 'src/testUtils/testingLibrary';
 import TrafficLight from './trafficLight';
 
 const component = <TrafficLight />;
 
 describe('TrafficLight component', () => {
   it('renders the three traffic light colors', () => {
-    render(component);
-    expect(screen.getByText("green")).toBeInTheDocument();
-    expect(screen.getByText("yellow")).toBeInTheDocument();
-    expect(screen.getByText("red")).toBeInTheDocument();
+    const page = renderWithProviders(component);
+    expect(page.getByText("green")).toBeInTheDocument();
+    expect(page.getByText("yellow")).toBeInTheDocument();
+    expect(page.getByText("red")).toBeInTheDocument();
   });
 });

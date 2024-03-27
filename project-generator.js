@@ -2,27 +2,25 @@ import fs from "fs";
 
 const templates = {
   component: name =>
-    `import React from 'react';
-import './${name}.css';
+    `import './${name}.css';
 
 export default function ${capitalize(name)}() {
   // TODO: write rest of ${capitalize(name)} component.
   return (
     <div className="${name}">
-      
+      {"${name}"}
     </div>
   );
 }`,
-  test: name => `import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event'
+  test: name => `import { renderWithProviders as render } from 'src/testUtils/testingLibrary';
 import ${capitalize(name)} from './${name}';
 
-const user = userEvent.setup();
 const component = <${capitalize(name)} />;
 
 describe('${capitalize(name)} component', () => {
   it('renders correctly', () => {
-    render(component);
+    const page = render(component);
+    expect(page.getByText("${name}")).toBeInTheDocument();
   });
 });`,
   css: name => `.${name} {
