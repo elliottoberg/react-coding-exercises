@@ -1,32 +1,35 @@
 import fs from "fs";
 
-const templates = {
-  component: (name) =>
-    `import './${name}.css';
+export function createPage(name) {
+  const camelCaseName = camelcaseName(name);
+  const pascalCaseName = camelCaseName.charAt(0).toLowerCase() + camelCaseName.slice(1);
 
-export default function ${capitalize(name)}() {
-  // TODO: write rest of ${capitalize(name)} component.
-  return (
-    <div className="${name}">
-      {"${name}"}
-    </div>
-  );
-}`,
-  test: (name) => `import { renderWithProviders as render } from 'src/testUtils/testingLibrary';
-import ${capitalize(name)} from './${name}';
+  const path = `./src/pages/${pascalCaseName}`;
+  if (!fs.existsSync(path)) {
+    createDirectory(path);
+  }
 
-const component = <${capitalize(name)} />;
+  createFiles(path, pascalCaseName);
 
-describe('${capitalize(name)} component', () => {
-  it('renders correctly', () => {
-    const page = render(component);
-    expect(page.getByText("${name}")).toBeInTheDocument();
-  });
-});`,
-  css: (name) => `.${name} {
-  
-}`
-};
+  const data = readDataJson();
+  const sortedById = data.pages.sort((a, b) => a.id - b.id);
+  const lastId = sortedById.length ? sortedById[sortedById.length - 1].id : 1;
+  data.pages.push({ id: lastId + 1, name: name, path: `src/pages/${pascalCaseName}/${pascalCaseName}` });
+  writeDataJson(data);
+}
+
+export function deletePage(name) {
+  const camelCaseName = camelcaseName(name);
+  const pascalCaseName = camelCaseName.charAt(0).toLowerCase() + camelCaseName.slice(1);
+
+  const path = `./src/pages/${pascalCaseName}`;
+  fs.rmSync(path, { recursive: true, force: true });
+  console.log("deleted directory: ", path);
+
+  const data = readDataJson();
+  data.pages = data.pages.filter(p => p.name !== name);
+  writeDataJson(data);
+}
 
 const capitalize = (name) => name.charAt(0).toUpperCase() + name.slice(1);
 
@@ -87,35 +90,34 @@ function writeDataJson(data) {
   });
 }
 
-export function createPage(name) {
-  const camelCaseName = camelcaseName(name);
-  const pascalCaseName = camelCaseName.charAt(0).toLowerCase() + camelCaseName.slice(1);
-
-  const path = `./src/pages/${pascalCaseName}`;
-  if (!fs.existsSync(path)) {
-    createDirectory(path);
-  }
-
-  createFiles(path, pascalCaseName);
-
-  const data = readDataJson();
-  const sortedById = data.pages.sort((a, b) => a.id - b.id);
-  const lastId = sortedById.length ? sortedById[sortedById.length - 1].id : 1;
-  data.pages.push({ id: lastId + 1, name: name, path: `src/pages/${pascalCaseName}/${pascalCaseName}`});
-  writeDataJson(data);
+function camelcaseName(name){
+  return name.split(" ").map(part => capitalize(part)).join("");
 }
 
-export function deletePage(name) {
-  const camelCaseName = camelcaseName(name);
-  const pascalCaseName = camelCaseName.charAt(0).toLowerCase() + camelCaseName.slice(1);
+const templates = {
+  component: (name) =>
+    `import './${name}.css';
 
-  const path = `./src/pages/${pascalCaseName}`;
-  fs.rmSync(path, { recursive: true, force: true });
-  console.log("deleted directory: ", path);
+export default function ${capitalize(name)}() {
+  // TODO: write rest of ${capitalize(name)} component.
+  return (
+    <div className="${name}">
+      {"${name}"}
+    </div>
+  );
+}`,
+  test: (name) => `import { renderWithProviders as render } from 'src/testUtils/testingLibrary';
+import ${capitalize(name)} from './${name}';
+
+const component = <${capitalize(name)} />;
+
+describe('${capitalize(name)} component', () => {
+  it('renders correctly', () => {
+    const page = render(component);
+    expect(page.getByText("${name}")).toBeInTheDocument();
+  });
+});`,
+  css: (name) => `.${name} {
   
-  const data = readDataJson();
-  data.pages = data.pages.filter(p => p.name !== name);
-  writeDataJson(data);
-}
-
-const camelcaseName = (name) => name.split(" ").map(part => capitalize(part)).join("");
+}`
+};
