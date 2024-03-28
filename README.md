@@ -1,30 +1,16 @@
-# React + TypeScript + Vite
+# React + TypeScript + Vite playground
+This project provides a playground environment for testing out ideas or completing react programming challenges. I created this mostly as a place to practice for react-based software engineering interviews. I wanted an easy way to keep track of and reference everything I had practiced.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+The app is essentially a simple storybook-like app.  A collapsible and searchable sidebar shows all the pages / projects you have created.  When you select one, it's content will render.
 
-Currently, two official plugins are available:
+# Usage
+Clone the repo and then do a `yarn install`.
+Start the vite server with `yarn start`.
+Add a new page with `yarn addPage "my page"`.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+You can also remove a page with `yarn removePage "my page"` HOWEVER this will delete the files for that page folder.  Be careful.
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+Recommended workflow:
+1. select 'use this template` in github in order to clone the repo to your own github account with any name you like
+2. clone your new repo locally and install + start
+3. add a page using `yarn addPage "my page"` -> only commit these changes when you are sure you want to 'save' what you did
