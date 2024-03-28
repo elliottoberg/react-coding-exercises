@@ -3,10 +3,12 @@ This project provides a playground environment for testing out ideas or completi
 
 The app is essentially a simple storybook-like app.  A collapsible and searchable sidebar shows all the pages / projects you have created.  When you select one, it's content will render.
 
+<img width="820" alt="Screenshot 2024-03-28 at 11 56 16 AM" src="https://github.com/elliottoberg/react-coding-exercises/assets/32965602/bb637eeb-d426-4a83-97e9-43be270cb525">
+
 # Usage
-Clone the repo and then do a `yarn install`.
-Start the vite server with `yarn start`.
-Add a new page with `yarn addPage "my page"`.
+- Clone the repo and then do a `yarn install`.
+- Start the vite server with `yarn start`.
+- Add a new page with `yarn addPage "my page"`.
 
 You can also remove a page with `yarn removePage "my page"` HOWEVER this will delete the files for that page folder.  Be careful.
 
