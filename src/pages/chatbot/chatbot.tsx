@@ -4,7 +4,7 @@ import "./chatbot.css"
 
 const currentUser = { id: 1, name: "Jon" };
 
-export function ChatbotPage() {
+export default function ChatbotPage() {
   return (
     <div className="chatbot-page">
       <ChatBot user={currentUser} />

@@ -1,7 +1,7 @@
 import React from "react";
 import "./contactUs.css"
 
-export function ConctactUsPage() {
+export default function ConctactUsPage() {
   return (
     <div className="contact-us">
       <TestForm />

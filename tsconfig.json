@@ -29,7 +29,8 @@
     "src",
     "./setupTests.ts",
     "jest.config.ts",
-    "babel.config.ts"
+    "babel.config.ts",
+    "projectGenerator.js"
   ],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

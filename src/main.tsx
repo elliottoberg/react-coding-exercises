@@ -3,28 +3,23 @@ import ReactDOM from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Root from './pages/root/root';
 import ErrorPage from './pages/errorPage/errorPage';
-import { ConctactUsPage } from './pages/contactUs/contactUs';
-import { ChatbotPage } from './pages/chatbot/chatbot';
-import MortgageCalculator from './pages/mortgageCalculator/mortgageCalculator';
-import Tabs from './pages/tabs/tabsInterface';
-import TodoList from './pages/todoList/todoList';
-import TrafficLight from './pages/trafficLight/trafficLight';
+import { pages } from 'src/db.json'
 
-export const projects = [
-  { name: "Contact Us Page", path: "contact_us", component: ConctactUsPage },
-  { name: "Chatbot", path: "chatbot", component: ChatbotPage },
-  { name: "Mortgate Calculator", path: "mortgage_calculator", component: MortgageCalculator },
-  { name: "Tab Interface", path: "tab_interface", component: Tabs },
-  { name: "Todo List", path: "todo_list", component: TodoList },
-  { name: "Traffic Light", path: "traffic_light", component: TrafficLight },
-]
+// Dynamically import all page elements in the pages directory.
+// Setting eager to true since, for now, we want all page modules loaded (not lazy loaded).
+const pageModules = import.meta.glob(['/src/pages/*/*.tsx', '!**/*.test.tsx'], { import: 'default', eager: true});
+const getAbsolutePath = (path: string) => `/${path}.tsx`;
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Root />,
     errorElement: <ErrorPage />,
-    children: projects.map(project => ({ path: project.path, element: <project.component /> })),
+    children: pages.map(page => {
+      const absolutePath = getAbsolutePath(page.path);
+      const PageElement = pageModules[absolutePath] as () => JSX.Element;
+      return { path: `/${page.id}`, element: PageElement ? <PageElement /> : null }
+    }),
   }
 ]);
 
