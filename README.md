@@ -3,7 +3,7 @@ This project provides a playground environment for testing out ideas or completi
 
 The app is essentially a simple storybook-like app.  A collapsible and searchable sidebar shows all the pages / projects you have created.  When you select one, it's content will render.
 
-<img width="820" alt="Screenshot 2024-03-28 at 11 56 16 AM" src="https://github.com/elliottoberg/react-coding-exercises/assets/32965602/bb637eeb-d426-4a83-97e9-43be270cb525">
+<kbd><img width="1149" alt="Screenshot 2024-03-28 at 4 47 57 PM" src="https://github.com/elliottoberg/react-coding-exercises/assets/32965602/26a24a8b-8abc-4c7e-8fd3-28c9b4e28d45"></kbd>
 
 # Usage
 - Select `use this template` in github in order to clone the repo to your own github account with any name you like
