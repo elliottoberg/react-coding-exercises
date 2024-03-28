@@ -6,9 +6,11 @@ The app is essentially a simple storybook-like app.  A collapsible and searchabl
 <img width="820" alt="Screenshot 2024-03-28 at 11 56 16 AM" src="https://github.com/elliottoberg/react-coding-exercises/assets/32965602/bb637eeb-d426-4a83-97e9-43be270cb525">
 
 # Usage
-- Clone the repo and then do a `yarn install`.
-- Start the vite server with `yarn start`.
-- Add a new page with `yarn addPage "my page"`.
+- Clone the repo and then do a `yarn install`
+- Start the vite server with `yarn start`
+- Add a new page with `yarn addPage "my page"`
+  - This will create a folder under `pages/myPage` with 3 new files: `myPage.tsx, myPage.css, myPage.test.tsx`
+  - The new page will automatically get added to the `db.json` file which controls what is displayed and searchable in the sidebar
 
 You can also remove a page with `yarn removePage "my page"` HOWEVER this will delete the files for that page folder.  Be careful.
 
