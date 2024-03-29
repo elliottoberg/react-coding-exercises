@@ -15,3 +15,16 @@ The app is essentially a simple storybook-like app.  A collapsible and searchabl
   - Only commit these changes when you are sure you want to 'save' what you did
 
 You can also remove a page with `yarn removePage "my page"` HOWEVER this will delete the files for that page folder.  Be careful.
+
+# Stack
+- Typescript
+- React
+- Libraries
+  - `react-query` is installed and ready for use in one of your pages / projects
+  - `react-router-dom` is also installed and being used for the sidebar
+  - `jest` & `react-testing-library` are installed and ready to be used in tests
+ 
+# Testing
+A custom render function is being imported in scaffolded test files by default.  The custom render function `renderWithProviders` ensures the test component is rendered with a `MemoryRouter` and the react-query `QueryProvider`.  It also initializes a user for user events and exposes the current location for the memory router.
+
+The regular react-testing-library render function is re-exported from the same testUtils file for testing components that don't need the providers.
